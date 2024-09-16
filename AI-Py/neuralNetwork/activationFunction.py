@@ -44,4 +44,3 @@ def layerSem(activations, weights, baises, function):
         outputWeights[i] = function(outputWeights[i])
 
     return outputWeights
-    

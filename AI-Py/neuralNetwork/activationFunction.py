@@ -34,13 +34,14 @@ class Sigmoid:
 
 
 
+
 # Returns vector
 def layerSem(activations, weights, biases, function):
     output_weights = []
     # The sum of weights and activations plus the bias
-    for i in range(len(weights)):
+    for i in range(len(activations)):
         for j in range(len(weights[i])):
-            activation_sum = sum(activations[i] * weights[i][j])# + biases[i]
+            activation_sum = sum(activations[j] * weights[i][j]) # + biases[i]
             output_weights.append(activation_sum)
 
     # Different activation functions    

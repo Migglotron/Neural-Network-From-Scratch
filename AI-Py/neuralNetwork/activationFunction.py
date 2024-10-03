@@ -62,6 +62,7 @@ def layerSem(activations, weights, biases, function):
 
 
 
+
 # Function to handle a single neuron in the output layer
 def outputNeuron(activations, weights, bias):
     activation_sum = sum(activations[i] * weights[i] for i in range(len(activations))) + bias

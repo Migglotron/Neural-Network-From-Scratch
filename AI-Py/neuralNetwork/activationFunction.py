@@ -40,7 +40,7 @@ def layerSem(activations, weights, biases, function):
     output_weights = []
     # The sum of weights and activations plus the bias
     for i in range(len(activations)):
-        for j in range(len(weights[i])):
+        for j in range(len(weights[i])): 
             activation_sum = weights[i][j] * activations[i] # + biases[i]
             output_weights.append(activation_sum)
 

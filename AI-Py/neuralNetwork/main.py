@@ -12,7 +12,6 @@ outputWeights1 = initializeWeightsBiases(2, 3)  # Weights for the final layer
 
 
 
-
 # # Testing # #
 
 # output_weights = []

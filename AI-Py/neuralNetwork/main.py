@@ -30,7 +30,6 @@ outputWeights1 = initializeWeightsBiases(2, 3)  # Weights for the final layer
 # # End of testing # #
 
 
-
 # # # Making / activating the layers
 layer1 = layerSem(Activations, weights, biases, "Sigmoid") # Layer 1
 # layer2 = layerSem(layer1, weights, biases, "Sigmoid") # Layer 2

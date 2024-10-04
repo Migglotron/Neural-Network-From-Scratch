@@ -35,7 +35,7 @@ class Sigmoid:
 
 
 
-# Returns vector
+# Returns vector 
 def layerSem(activations, weights, biases):
     neuron_output = []
     # Loop through the weights and activations and get the sum of the products

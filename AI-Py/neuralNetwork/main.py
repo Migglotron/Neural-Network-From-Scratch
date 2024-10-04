@@ -11,7 +11,7 @@ weights, biases = initializeWeightsBiases(3, 2) # Mkaes weights and biases for l
 outputWeights1, gliases = initializeWeightsBiases(2, 3)  # Weights for the final layer, 2 neurons(output), 3 inputs
 
 
-            # # Testing # #  
+            # # Testing # # 
 # print("Activations:", Activations)
 # print("Weights:", weights)
 # print("Biases:", biases)

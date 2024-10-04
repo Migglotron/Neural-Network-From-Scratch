@@ -1,6 +1,6 @@
 import math
 import random
-from activationFunction import Sigmoid, ReLU, Softmax, activations, layerSem, outputLayer, initializeWeightsBiases, outputNeuron
+from activationFunction import Sigmoid, ReLU, Softmax, activations, layerSum, outputLayer, initializeWeightsBiases, outputNeuron
 from backpropagation import Backpropagation, crossEntropyLoss
 
 
@@ -32,9 +32,9 @@ outputWeights1, gliases = initializeWeightsBiases(2, 3)  # Weights for the final
 
 
 # # # Making / activating the layers
-layer1 = layerSem(Activations, weights, biases) # Layer 1
-layer2 = layerSem(layer1, weights, biases) # Layer 2
-outputLayer = layerSem(layer2, outputWeights1, gliases) # Output Layer
+layer1 = layerSum(Activations, weights, biases) # Layer 1
+layer2 = layerSum(layer1, weights, biases) # Layer 2
+outputLayer = layerSum(layer2, outputWeights1, gliases) # Output Layer
 
 
 # # # Print Layer Outputs

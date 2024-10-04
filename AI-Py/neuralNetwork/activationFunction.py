@@ -36,7 +36,7 @@ class Sigmoid:
 
 
 # Returns vector
-def layerSem(activations, weights, biases):
+def layerSum(activations, weights, biases):
     neuron_output = []
     # Loop through the weights and activations and get the sum of the products
     for i in range(len(weights)): # For all the group of Weights set

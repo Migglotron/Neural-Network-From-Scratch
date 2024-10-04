@@ -27,9 +27,9 @@ class Backpropagation():
 
 
 # Test the backpropagation
-# backprop = Backpropagation(0.1)     # Create a backpropagation object with a learning rate of 0.1
-# print(backprop.forward(0.8, 1))     # Find the error of the neural network (cost function)
-# print(backprop.backward(0.8, 1))    # Find the derivative of the cost function with respect to the weights and biases
+backprop = Backpropagation(0.1)     # Create a backpropagation object with a learning rate of 0.1
+print(backprop.forward(0.8, 1))     # Find the error of the neural network (cost function)
+print(backprop.backward(0.8, 1))    # Find the derivative of the cost function with respect to the weights and biases
 
 
 

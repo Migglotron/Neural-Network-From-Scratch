@@ -6,34 +6,38 @@ from backpropagation import Backpropagation, crossEntropyLoss
 
 Activations =  activations(2) # Inicial input to layer 1
 
-weights, biases = initializeWeightsBiases(3, 2)  # Weights for the hidden layers
+weights, biases = initializeWeightsBiases(3, 2) # Mkaes weights and biases for layers, 3 neurons(output), 2 inputs
 
-outputWeights1 = initializeWeightsBiases(2, 3)  # Weights for the final layer
+outputWeights1, gliases = initializeWeightsBiases(2, 3)  # Weights for the final layer, 2 neurons(output), 3 inputs
 
 
+            # # Testing # # 
+# print("Activations:", Activations)
+# print("Weights:", weights)
+# print("Biases:", biases)
+# print("Output Weights:", outputWeights1)
 
-# # Testing # #
+# hell = []
+# for i in range(len(weights)):
+#     for j in range(len(Activations)):
+#         print("\nWeight", i, j, ":", weights[i][j])
+#         print("Activations", i, ":", Activations)
+    
+#     happy = (weights[i][j] * Activations[j])
+#     hell.append(happy)
 
-# output_weights = []
+# print("Expected Output:", hell)
+        # # End of Testing # #
 
-# print(Activations)
-# print(weights)
-
-# for i in range(len(Activations)):
-#     for j in range(len(weights[i])):
-#         activation_sum = Activations[0] * weights[0][0] + biases[0]
-#         activation_sum1 = Activations[1] * weights[0][1] + biases[1]
-
-# print("Output" ,activation_sum + activation_sum1)
-
-# # End of testing # #
 
 
 # # # Making / activating the layers
-layer1 = layerSem(Activations, weights, biases, "Sigmoid") # Layer 1
-# layer2 = layerSem(layer1, weights, biases, "Sigmoid") # Layer 2
-# outputLayer = outputLayer(layer2, outputWeights1, 0) # Output Layer
+layer1 = layerSem(Activations, weights, biases) # Layer 1
+layer2 = layerSem(layer1, weights, biases) # Layer 2
+outputLayer = layerSem(layer2, outputWeights1, gliases) # Output Layer
 
 
 # # # Print Layer Outputs
-print("Output Layer: ", layer1) # Output Layer
+print("\nFirst Hidden Layer: ", layer1) # Output Layer
+print("\nSecond Hidden Layer: ", layer2) # Output Layer
+print("\nOutput Layer: ", outputLayer, "\n") # Output Layer

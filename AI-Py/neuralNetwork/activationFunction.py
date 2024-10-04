@@ -36,29 +36,33 @@ class Sigmoid:
 
 
 # Returns vector
-def layerSem(activations, weights, biases, function):
-    output_weights = []
-    # The sum of weights and activations plus the bias
-    for i in range(len(activations)):
-        for j in range(len(weights[i])): 
-            activation_sum = weights[i][j] * activations[i] # + biases[i]
-            output_weights.append(activation_sum)
+def layerSem(activations, weights, biases):
+    neuron_output = []
+    # Loop through the weights and activations and get the sum of the products
+    for i in range(len(weights)): # For all the group of Weights set
+        for j in range(len(activations)): # For all of the Activations from the previous layer
+            # print("\nWeight", i, j, ":", weights[i][j]) # for testing purposes
+            # print("Activations", i, ":", activations) # For testing purposes
+            break
 
-    # Different activation functions    
-    if function == "Sigmoid":
-        sigmoid = Sigmoid()
-        return sigmoid.forward(output_weights)
-    elif function == "ReLU":
-        relu = ReLU()
-        return relu.forward(output_weights)
-    elif function == "Softmax":
-        softmax = Softmax()
-        return softmax.forward(output_weights)
-    else:
-        print("Error: Activation function not recognized")
-        return None
+        happy = (weights[i][j] * activations[j]) + biases[j] # Multiply the weights by the activations and adds the bias
+        neuron_output.append(happy) # Add the result from "happy" to the neuron_output list
 
-    return output_weights
+    # # Different activation functions    
+    # if function == "Sigmoid":
+    #     sigmoid = Sigmoid()
+    #     return sigmoid.forward(output_weights)
+    # elif function == "ReLU":
+    #     relu = ReLU()
+    #     return relu.forward(output_weights)
+    # elif function == "Softmax":
+    #     softmax = Softmax()
+    #     return softmax.forward(output_weights)
+    # else:
+    #     print("Error: Activation function not recognized")
+    #     return None
+
+    return neuron_output
 
 
 
@@ -71,7 +75,7 @@ def outputNeuron(activations, weights, bias):
 def outputLayer(activations, weights, biases):
     output_sums = []
     for i in range(len(weights)):
-        activation_sum = sum(activations[j] * weights[i][j] for j in range(len(activations))) + biases[i]
+        activation_sum = (activations[j] * weights[i][j] for j in range(len(activations))) + biases[i]
         output_sums.append(activation_sum)
     
     softmax = Softmax()
@@ -83,7 +87,7 @@ def outputLayer(activations, weights, biases):
 # Randomly initialize the weights and biases
 def initializeWeightsBiases(neurons, inputs):
     weights = [[random.random() for _ in range(inputs)] for _ in range(neurons)]
-    biases = [random.random() for _ in range(neurons)]
+    biases = [1 for _ in range(neurons)]
     return weights, biases
 
 # Randomly initialize the Inputs

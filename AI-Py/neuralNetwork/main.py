@@ -1,27 +1,43 @@
 import math
 import random
-from activationFunction import Sigmoid, ReLU, Softmax, activations, layerSem, outputLayer, initializeWeightsBiases, outputNeuron
+from activationFunction import Sigmoid, ReLU, Softmax, activations, layerSum, outputLayer, initializeWeightsBiases, outputNeuron
 from backpropagation import Backpropagation, crossEntropyLoss
 
 
 Activations =  activations(2) # Inicial input to layer 1
 
-weights, biases = initializeWeightsBiases(3, 2)  # Weights for the hidden layers
+weights, biases = initializeWeightsBiases(3, 2) # Mkaes weights and biases for layers, 3 neurons(output), 2 inputs
 
-outputWeights1 = initializeWeightsBiases(2, 3)  # Weights for the final layer
-
-
-# print(type(Activations))
-# print(type(weights))
-# print(type(biases))
+outputWeights1, gliases = initializeWeightsBiases(2, 3)  # Weights for the final layer, 2 neurons(output), 3 inputs
 
 
+            # # Testing # # 
+# print("Activations:", Activations)
+# print("Weights:", weights)
+# print("Biases:", biases)
+# print("Output Weights:", outputWeights1)
 
-# Making / activating the layers
-layer1 = layerSem(Activations, weights, biases, "Sigmoid") # Layer 1
-layer2 = layerSem(layer1, weights, biases, "Sigmoid") # Layer 2
-outputLayer = outputLayer(layer2, outputWeights1, 0) # Output Layer
+# hell = []
+# for i in range(len(weights)):
+#     for j in range(len(Activations)):
+#         print("\nWeight", i, j, ":", weights[i][j])
+#         print("Activations", i, ":", Activations)
+    
+#     happy = (weights[i][j] * Activations[j])
+#     hell.append(happy)
+
+# print("Expected Output:", hell)
+        # # End of Testing # #
 
 
-# # Print Layer Outputs
-# print("Output Layer: ", outputLayer) # Output Layer
+
+# # # Making / activating the layers
+layer1 = layerSum(Activations, weights, biases) # Layer 1
+layer2 = layerSum(layer1, weights, biases) # Layer 2
+outputLayer = layerSum(layer2, outputWeights1, gliases) # Output Layer
+
+
+# # # Print Layer Outputs
+print("\nFirst Hidden Layer: ", layer1) # Output Layer
+print("\nSecond Hidden Layer: ", layer2) # Output Layer
+print("\nOutput Layer: ", outputLayer, "\n") # Output Layer

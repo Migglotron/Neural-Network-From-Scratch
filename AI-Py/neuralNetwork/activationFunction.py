@@ -1,5 +1,6 @@
 import math
 import random
+import testData
 
 # ReLU Activation Function
 class ReLU:
@@ -92,4 +93,6 @@ def initializeWeightsBiases(neurons, inputs):
 
 # Randomly initialize the Inputs
 def activations(amount):
-    return [random.random() for _ in range(amount)]
+    inputs = []
+    for i in range(amount):
+        inputs.append(train_images[i])

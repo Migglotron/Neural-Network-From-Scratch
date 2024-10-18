@@ -1,6 +1,5 @@
 import math
 import random
-import testData
 
 # ReLU Activation Function
 class ReLU:
@@ -88,11 +87,16 @@ def outputLayer(activations, weights, biases):
 # Randomly initialize the weights and biases
 def initializeWeightsBiases(neurons, inputs):
     weights = [[random.random() for _ in range(inputs)] for _ in range(neurons)]
-    biases = [1 for _ in range(neurons)]
+    biases = [0.1 for _ in range(neurons)]
     return weights, biases
 
 # Randomly initialize the Inputs
 def activations(amount):
+    # Random Activations
     inputs = []
     for i in range(amount):
-        inputs.append(train_images[i])
+        inputs.append(float(random.randint(0, 1)))
+    
+    print("Inputs:", inputs)
+    return inputs
+

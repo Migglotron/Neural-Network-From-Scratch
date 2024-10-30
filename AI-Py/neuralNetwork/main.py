@@ -1,29 +1,29 @@
 import math
 import random
-from activationFunction import sigmoid, sigmoid_derivative, ReLU, Softmax, layerSum, outputNeuron, outputLayer, random_weight
-from backpropagation import Backpropagation
+import os
+from activationFunction import sigmoid, sigmoid_derivative, ReLU, Softmax, layerSum, outputNeuron, outputLayer, random_weight, activations
+from backpropagation import Backpropagation as bp
 
-X_train = [[0, 0, 1],
-           [0, 1, 1],
-           [1, 0, 1],
-           [1, 1, 1]]
-
-y_train = [[0], [1], [1], [0]]
-
-# Inisializing the Backpropagation
-bp = Backpropagation(5, 4, 1, 0.01) # 5 inputs, 10 hidden neurons, 5 output neurons, learning rate 0.1
+os.system('clear')
 
 
-Activations =  activations(5) # Inicial input to layer 1
+X_train = [[0.0],  # Inputs
+            [1.0],
+            [1.0]]
 
-weights = random_weight(5, 10) # Weights for the first layer, 5 inputs, 10 neurons
+Y_train = [[0], [1], [1], [0]] # Biases
 
-outputWeights1 = random_weight(10, 5)  # Weights for the final layer, 10 neurons(output), 10 inputs
+
+Activations =  activations(3) # Inicial input to layer 1, 3 initial neurons
+
+weights = random_weight(3, 5) # Weights for the first layer, 3 inputs, 5 neurons
+
+# outputWeights1 = random_weight(10, 5)  # Weights for the final layer, 10 neurons(output), 10 inputs
 
 
             # # Testing # # 
-# print("Activations:", Activations)
-# print("Weights:", weights)
+print("Activations:", Activations)
+print("Weights:", weights)
 # print("Biases:", biases)
 # print("Output Weights:", outputWeights1)
 
@@ -39,6 +39,9 @@ outputWeights1 = random_weight(10, 5)  # Weights for the final layer, 10 neurons
 # print("Expected Output:", hell)
         # # End of Testing # #
 
+hidden_layers = layerSum(Activations, weights, 1.0)
+final_layer = layerSum(hidden_layers, weights, 1.0)
+
 
 
 # # # # Making / activating the layers
@@ -46,24 +49,16 @@ outputWeights1 = random_weight(10, 5)  # Weights for the final layer, 10 neurons
 # layer2 = layerSum(layer1, weights, biases) # Layer 2
 # outputLayer = layerSum(layer2, outputWeights1, [0.5]) # Output Layer
 
-hidden_input = [[bp.dot_product(X_train[i], [bp.weights_input_hidden[j][k] for j in range(bp.input_size)]) + bp.bias_hidden[k] for k in range(bp.hidden_size)] for i in range(len(X_train))]
-hidden_output = [[bp.sigmoid(hidden_input[i][j]) for j in range(bp.hidden_size)] for i in range(len(hidden_input))]
-final_input = [[bp.dot_product(hidden_output[i], [bp.weights_hidden_output[j][k] for j in range(bp.hidden_size)]) + bp.bias_output[k] for k in range(bp.output_size)] for i in range(len(hidden_output))]
-final_output = [[bp.sigmoid(final_input[i][j]) for j in range(bp.output_size)] for i in range(len(final_input))]
-
-
 
 # # # Print Layer Outputs
-print("\nFirst Hidden Layer: ", hidden_output) # Output Layer
-print("\nSecond Hidden Layer: ", final_output) # Output Layer
-# print("\nOutput Layer: ", outputLayer, "\n") # Output Layer
+print("\nFirst Hidden Layer: ", hidden_layers) # Output Layer
+print("\nOutput Layer: ", final_layer) # Output Layer
+# # print("\nOutput Layer: ", outputLayer, "\n") # Output Layer
 
+# # cost
+# bp.cost(final_layer, X_train[1])
 
-
-# Backward pass
-for i in range(len(X_train)):
-    bp.backward_pass(X_train[i], y_train[i], hidden_output[i], final_output[i])
-
+# Re-ajust weights
 
 
 

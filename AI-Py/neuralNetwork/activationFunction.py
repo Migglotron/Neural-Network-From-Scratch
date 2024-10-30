@@ -33,7 +33,12 @@ def sigmoid_derivative(self, x):
 
 # Returns vector
 def layerSum(activations, weights, biases):
-    return sum(v1 * v2 for v1, v2 in zip(vec1, vec2))
+    neuron_output = []
+    for i in range(len(weights)):
+        for j in range(len(activations)):
+            happy = (weights[i][j] * activations[j])# + biases[j]
+            neuron_output.append(happy)
+    return neuron_output
 
 
 
@@ -56,14 +61,11 @@ def outputLayer(activations, weights, biases):
 
 
 # Randomly initialize the weights and biases
-def random_weight(self):
-    return (2 * random.random()) - 1
+def random_weight(inputs, neurons):
+    weights = [[random.random() for _ in range(inputs) for _ in range(neurons)]]
+    return weights
 
 # Randomly initialize the Inputs
 def activations(amount):
-    # Random Activations
-    inputs = []
-    for i in range(amount):
-        inputs.append(float(random.randint(0, 1)))
-    return inputs
+    return [random.random() for _ in range(amount)]
 

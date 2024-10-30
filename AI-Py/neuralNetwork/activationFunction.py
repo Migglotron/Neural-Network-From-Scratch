@@ -21,15 +21,11 @@ class Softmax:
         raise NotImplementedError("Backward pass for Softmax not implemented")
 
 # Sigmoid function
-class Sigmoid:
-    def forward(self, x):
-        if isinstance(x, list):
-            return [1 / (1 + math.exp(-i)) for i in x]
-        else:
-            return 1 / (1 + math.exp(-x))
+def sigmoid(self, x):
+    return 1 / (1 + math.exp(-x))
     
-    def backward(self, x):
-        return x * (1 - x)
+def sigmoid_derivative(self, x):
+    return x * (1 - x)
 
 
 
@@ -37,32 +33,7 @@ class Sigmoid:
 
 # Returns vector
 def layerSum(activations, weights, biases):
-    neuron_output = []
-    # Loop through the weights and activations and get the sum of the products
-    for i in range(len(weights)): # For all the group of Weights set
-        for j in range(len(activations)): # For all of the Activations from the previous layer
-            # print("\nWeight", i, j, ":", weights[i][j]) # for testing purposes
-            # print("Activations", i, ":", activations) # For testing purposes
-            break
-
-        happy = (weights[i][j] * activations[j]) + biases[j] # Multiply the weights by the activations and adds the bias
-        neuron_output.append(happy) # Add the result from "happy" to the neuron_output list
-
-    # # Different activation functions    
-    # if function == "Sigmoid":
-    #     sigmoid = Sigmoid()
-    #     return sigmoid.forward(output_weights)
-    # elif function == "ReLU":
-    #     relu = ReLU()
-    #     return relu.forward(output_weights)
-    # elif function == "Softmax":
-    #     softmax = Softmax()
-    #     return softmax.forward(output_weights)
-    # else:
-    #     print("Error: Activation function not recognized")
-    #     return None
-
-    return neuron_output
+    return sum(v1 * v2 for v1, v2 in zip(vec1, vec2))
 
 
 
@@ -85,10 +56,8 @@ def outputLayer(activations, weights, biases):
 
 
 # Randomly initialize the weights and biases
-def initializeWeightsBiases(neurons, inputs):
-    weights = [[random.random() for _ in range(inputs)] for _ in range(neurons)]
-    biases = [0.1 for _ in range(neurons)]
-    return weights, biases
+def random_weight(self):
+    return (2 * random.random()) - 1
 
 # Randomly initialize the Inputs
 def activations(amount):
@@ -96,7 +65,5 @@ def activations(amount):
     inputs = []
     for i in range(amount):
         inputs.append(float(random.randint(0, 1)))
-    
-    print("Inputs:", inputs)
     return inputs
 

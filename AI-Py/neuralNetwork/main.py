@@ -4,16 +4,13 @@ from activationFunction import sigmoid, sigmoid_derivative, ReLU, Softmax, layer
 from backpropagation import Backpropagation
 
 
-X_train = [[0.0, 0.0, 1.0],
-            [0.0, 1.0, 1.0],
-            [1.0, 1.0, 1.0],
-            [1.0, 0.0, 1.0]]
+training_data = [([0, 0], [0]), ([0, 1], [1]), ([1, 0], [1]), ([1, 1], [0])]
 
-Y_train = [[0.0], [1.0], [1.0], [0.0]]
+bp = Backpropagation(input_size=2, hidden_size=2, output_size=1, learning_rate=0.5)
+epochs = 5000
+bp.train(training_data, epochs)
 
-bp = Backpropagation(5,4,2,0.01)
-
-Activations =  activations(2) # Inicial input to layer 1
+# Activations =  activations(2) # Inicial input to layer 1
 
 # weights, biases = initializeWeightsBiases(3, 2) # Mkaes weights and biases for layers, 3 neurons(output), 2 inputs
 

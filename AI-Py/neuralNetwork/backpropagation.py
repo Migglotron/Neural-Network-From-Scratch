@@ -15,29 +15,31 @@ class Backpropagation:
         self.bias_output = [0.0 for _ in range(output_size)]
 
     def forward(self, inputs):
-        hidden_activations = [sigmoid(sum(inputs[i] * self.weights_input_hidden[i][j] for i in range(len(inputs))) + self.bias_hidden[j]) for j in range(len(self.weights_input_hidden[0]))]
-        outputs = [sigmoid(sum(hidden_activations[j] * self.weights_hidden_output[j][k] for j in range(len(hidden_activations))) + self.bias_output[k]) for k in range(len(self.weights_hidden_output[0]))]
+        hidden_activations = [sigmoid(sum(inputs[i] * self.weights_input_hidden[i][j] for i in range(len(inputs))) + self.bias_hidden[j])
+                              for j in range(len(self.weights_input_hidden[0]))]
+        outputs = [sigmoid(sum(hidden_activations[j] * self.weights_hidden_output[j][k] for j in range(len(hidden_activations))) + self.bias_output[k])
+                   for k in range(len(self.weights_hidden_output[0]))]
         return hidden_activations, outputs
 
-    
     def backward_pass(self, inputs, hidden_activations, outputs, expected_outputs):
-        output_deltas = [(outputs[k] - expected_outputs[k]) * outputs[k] * (1- outputs[k]) for k in range(len(outputs))]
-        hidden_deltas = [sum(self.weights_hidden_output[j][k] * outputs[k] for k in range(len(output_deltas))) * hidden_activations[j] * (1 - hidden_activations[j]) for j in range(len(hidden_activations))]
+        output_deltas = [(outputs[k] - expected_outputs[k]) * outputs[k] * (1 - outputs[k]) for k in range(len(outputs))]
+        hidden_deltas = [sum(self.weights_hidden_output[j][k] * output_deltas[k] for k in range(len(output_deltas))) * hidden_activations[j] * (1 - hidden_activations[j])
+                         for j in range(len(hidden_activations))]
 
         for j in range(len(self.weights_hidden_output)):
             for k in range(len(self.weights_hidden_output[j])):
                 self.weights_hidden_output[j][k] -= self.learning_rate * output_deltas[k] * hidden_activations[j]
         for k in range(len(self.bias_output)):
             self.bias_output[k] -= self.learning_rate * output_deltas[k]
-        
+
         for i in range(len(self.weights_input_hidden)):
-            for j in range(len(self.weights_input_hidden[j])):
+            for j in range(len(self.weights_input_hidden[i])):
                 self.weights_input_hidden[i][j] -= self.learning_rate * hidden_deltas[j] * inputs[i]
         for j in range(len(self.bias_hidden)):
             self.bias_hidden[j] -= self.learning_rate * hidden_deltas[j]
 
     def train(self, training_data, epochs):
-        for epochs in range(epochs):
+        for epoch in range(epochs):
             for inputs, expected_outputs in training_data:
                 hidden_activations, outputs = self.forward(inputs)
                 self.backward_pass(inputs, hidden_activations, outputs, expected_outputs)
@@ -52,6 +54,7 @@ class Backpropagation:
         }
         with open(filename, 'w') as f:
             json.dump(params, f)
+        print("Saved...")
     
     def load_parameters(self, filename="network_parameters.json"):
         try:
@@ -84,7 +87,7 @@ nn = Backpropagation(input_size=2, hidden_size=2, output_size=1, learning_rate=0
 
 # Train on XOR data
 training_data = [([0, 0], [0]), ([0, 1], [1]), ([1, 0], [1]), ([1, 1], [0])]
-epochs = 5000
+epochs = 50000
 nn.train(training_data, epochs)
 
 # Save the trained parameters
@@ -99,5 +102,6 @@ results = []
 for inputs, expected_output in training_data:
     _, output = nn2.forward(inputs)
     results.append((inputs, output, expected_output))
+    print("\nOutputs:", output)
 
-print(results)
+print("\n", results)

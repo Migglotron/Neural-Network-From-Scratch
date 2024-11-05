@@ -80,7 +80,7 @@ class SimpleNeuralNetwork:
 nn = SimpleNeuralNetwork(input_size=2, hidden_size=2, output_size=1, learning_rate=0.5)
 
 # Train on XOR data
-training_data = [([0, 0], [0]), ([0, 1], [1]), ([1, 0], [1]), ([1, 1], [0])]
+training_data = [([0, 0], [0]), ([0, 1], [1]), ([1, 0], [0]), ([1, 1], [1])]
 epochs = 5000
 nn.train(training_data, epochs)
 
@@ -96,5 +96,7 @@ results = []
 for inputs, expected_output in training_data:
     _, output = nn2.forward(inputs)
     results.append((inputs, output, expected_output))
+    print("Outputs:", output)
 
 print(results)
+
